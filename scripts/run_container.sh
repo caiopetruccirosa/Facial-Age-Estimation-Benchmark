@@ -27,5 +27,5 @@ exec docker run \
     -v "/hadatasets/facial-age-estimation/utk-face":"/local/xfrancv/Faces/UTKFace" \
     -d -it --rm \
     --name "$CONTAINER_NAME" \
-    "$IMAGE_TAG"
+    "$IMAGE_TAG" \
     bash
