@@ -5,7 +5,7 @@ DEFAULT_IMAGE_TAG="facial-age-benchmark-env"
 DOCKERFILE="Dockerfile"
 
 # these variables could be passed as environment variables
-IMAGE_TAG=${IMAGE_TAG:-DEFAULT_IMAGE_TAG}
+IMAGE_TAG=${IMAGE_TAG:-$DEFAULT_IMAGE_TAG}
 USERNAME=${USERNAME:-$(id -un)}
 USER_UID=${USER_UID:-$(id -u)}
 USER_GNAME=${USER_GNAME:-$(id -gn)}
