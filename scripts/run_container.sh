@@ -4,7 +4,7 @@
 DEFAULT_IMAGE_TAG="facial-age-benchmark-env"
 
 # these variables could be passed as environment variables
-IMAGE_TAG=${IMAGE_TAG:-DEFAULT_IMAGE_TAG}
+IMAGE_TAG=${IMAGE_TAG:-$DEFAULT_IMAGE_TAG}
 CONTAINER_NAME=${IMAGE_TAG}-container
 
 RAM_SIZE="32g"
@@ -18,7 +18,7 @@ exec docker run \
     -v "$WORK_DIR":/workspace \
     -v "/hadatasets/facial-age-estimation/afad":"/local/xfrancv/Faces/AFAD" \
     -v "/hadatasets/facial-age-estimation/cacd":"/local/xfrancv/Faces/CACD2000" \
-    -v "/hadatasets/facial-age-estimation/clap16/appa-real-release":/local/xfrancv/Faces/ChaLearn2016" \
+    -v "/hadatasets/facial-age-estimation/clap16/appa-real-release":"/local/xfrancv/Faces/ChaLearn2016" \
     -v "/hadatasets/facial-age-estimation/fairface/fairface-img-margin025-trainval":"/local/xfrancv/Faces/FairFace" \
     -v "/hadatasets/facial-age-estimation/fg-net/FGNET":"/local/xfrancv/Faces/FG-NET" \
     -v "/hadatasets/facial-age-estimation/imdb-clean/data":"/local/xfrancv/Faces/IMDB_WIKI" \
