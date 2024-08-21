@@ -53,10 +53,10 @@ COPY environment.yaml .
 RUN conda env create -f environment.yaml
 
 # Install PyTorch with the GPU support
-RUN conda install -n age_conda_env pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
+RUN $CONDA_PREFIX/envs/age_conda_env/bin/pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
 
 # Install missing dependencies
-RUN conda install -n age_conda_env conda-forge::albumentations pandas matplotlib
+RUN $CONDA_PREFIX/envs/age_conda_env/bin/pip install albumentations pandas matplotlib
 
 # **********************
 #   User Configuration  
