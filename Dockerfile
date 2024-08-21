@@ -40,12 +40,8 @@ RUN rm -rf /var/lib/apt/lists/* && \
     apt autoremove && \
     apt clean
 
-# # Install miniconda
-# ENV CONDA_DIR /opt/conda
-# RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
-#    /bin/bash ~/miniconda.sh -b -p /opt/conda
-
 # Put conda in path so we can use conda activate
+ENV CONDA_DIR /opt/conda
 ENV PATH=$CONDA_DIR/bin:$PATH
 
 # Create the environment:
@@ -53,10 +49,10 @@ COPY environment.yaml .
 RUN conda env create -f environment.yaml
 
 # Install PyTorch with the GPU support
-RUN $CONDA_PREFIX/envs/age_conda_env/bin/pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
+RUN $CONDA_DIR/envs/age_conda_env/bin/pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
 
 # Install missing dependencies
-RUN $CONDA_PREFIX/envs/age_conda_env/bin/pip install albumentations pandas matplotlib
+RUN $CONDA_DIR/envs/age_conda_env/bin/pip install albumentations pandas matplotlib
 
 # **********************
 #   User Configuration  
