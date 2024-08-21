@@ -16,6 +16,7 @@ exec docker run \
     --shm-size="$RAM_SIZE" \
     -p "$PORT":"$PORT" \
     -v "$WORK_DIR":/workspace \
+    -v "/work/caio.rosa/Facial-Age-Estimation-Benchmark-Databases":"/workspace/facebase/benchmarks/databases" \
     -v "/hadatasets/facial-age-estimation/afad":"/local/xfrancv/Faces/AFAD" \
     -v "/hadatasets/facial-age-estimation/cacd":"/local/xfrancv/Faces/CACD2000" \
     -v "/hadatasets/facial-age-estimation/clap16/appa-real-release":"/local/xfrancv/Faces/ChaLearn2016" \
