@@ -32,7 +32,8 @@ RUN apt-get update && \
         software-properties-common build-essential \
         wget git nano vim ffmpeg libgl1-mesa-glx libglib2.0-0 \
         bzip2 cmake curl htop libssl-dev nvtop net-tools pandoc \
-        python3-sphinx tmux tree unrar unzip xdot fonts-powerline
+        python3-sphinx tmux tree unrar unzip xdot fonts-powerline \
+        libsm6 libxext6 libgl1
 
 # Anything else you want to do like clean up goes here *
 RUN rm -rf /var/lib/apt/lists/* && \
@@ -40,19 +41,9 @@ RUN rm -rf /var/lib/apt/lists/* && \
     apt autoremove && \
     apt clean
 
-# Put conda in path so we can use conda activate
-ENV CONDA_DIR /opt/conda
-ENV PATH=$CONDA_DIR/bin:$PATH
-
-# Create the environment:
-COPY environment.yaml .
-RUN conda env create -f environment.yaml
-
-# Install PyTorch with the GPU support
-RUN $CONDA_DIR/envs/age_conda_env/bin/pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
-
-# Install missing dependencies
-RUN $CONDA_DIR/envs/age_conda_env/bin/pip install albumentations pandas matplotlib
+# Install Python packages
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
 # **********************
 #   User Configuration  

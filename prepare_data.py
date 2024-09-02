@@ -122,7 +122,12 @@ if __name__ == '__main__':
             labels = get_labels(face, tasks)
             img_file = config['data']['img_dir'] + face['img_path']
             bbox_exists = ("aligned_bbox" in face.keys() and len(face['aligned_bbox']) > 0) or ("bbox" in face.keys())
-            if bbox_exists and labels is not None and face['folder'] in folders and os.path.exists(img_file):
+            
+            img = None
+            if os.path.exists(img_file):
+                img = cv2.imread(img_file)
+
+            if bbox_exists and labels is not None and face['folder'] in folders and os.path.exists(img_file) and img is not None:
                 count += 1
                 local_count += 1
 
@@ -148,6 +153,7 @@ if __name__ == '__main__':
             else:
                 print('-------------------------------------------------')
                 print('file exists:', os.path.exists(img_file))
+                print('image is not empty:', img is not None)
                 print('full annotation:', labels is not None)
                 print('in folder:', face['folder'] in folders)
                 print('bbox exists:', bbox_exists)
