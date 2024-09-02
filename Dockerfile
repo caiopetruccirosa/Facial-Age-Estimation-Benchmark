@@ -3,12 +3,6 @@
 # **********************
 FROM pytorch/pytorch:2.0.1-cuda11.7-cudnn8-runtime
 
-# ***************************
-#   Directory Configuration
-# ***************************
-
-# Set temporary directory
-WORKDIR /container
 
 # *********************
 #     Env Variables    
@@ -21,9 +15,10 @@ ARG USER_GNAME=recod
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-# **********************
-#   Package Management  
-# **********************
+
+# **********************************
+#   System-level Package Management  
+# **********************************
 
 # Install base utilities and common apt packages
 RUN apt-get update && \
@@ -41,9 +36,15 @@ RUN rm -rf /var/lib/apt/lists/* && \
     apt autoremove && \
     apt clean
 
+
+# **********************************
+#   Python-level Package Management  
+# **********************************
+
 # Install Python packages
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+COPY requirements.txt /build/requirements.txt
+RUN pip install -r /build/requirements.txt
+
 
 # **********************
 #   User Configuration  
@@ -69,6 +70,11 @@ RUN chown -R $USER_UID:$USER_GID /home/$USERNAME
 
 #  Set the default user
 USER $USERNAME
+
+
+# *********************************
+#  Working Directory Configuration
+# *********************************
 
 # Set directory
 WORKDIR /workspace
