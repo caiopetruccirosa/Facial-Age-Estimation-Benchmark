@@ -8,10 +8,10 @@ FROM pytorch/pytorch:2.0.1-cuda11.7-cudnn8-runtime
 #     Env Variables    
 # *********************
 
-ARG USERNAME=caio.rosa
-ARG USER_UID=10399
-ARG USER_GID=1000
-ARG USER_GNAME=recod
+ARG USERNAME
+ARG USER_UID
+ARG USER_GID
+ARG USER_GNAME
 
 ARG DEBIAN_FRONTEND=noninteractive
 
