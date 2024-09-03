@@ -14,6 +14,8 @@ import argparse
 import wandb
 from datetime import datetime
 
+from dotenv import load_dotenv
+
 # fix random seeds for reproducibility
 SEED = 123
 torch.manual_seed(SEED)
@@ -101,8 +103,12 @@ if __name__ == '__main__':
     if args.wandb_offline:
         model = "offline"
     
+    # Load WANDB_API_KEY as environment variable
+    load_dotenv()
+
+    wandb_project = "Facial-Age-Estimation-Benchmark"
     wandb_name = config_name + f"({args.split}) " + datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-    wandb.init( config=dict( yaml= args.config ), name = wandb_name, mode=mode )
+    wandb.init( project=wandb_project, config=dict( yaml= args.config ), name = wandb_name, mode=mode )
 
     # Detect if we have a GPU available
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
