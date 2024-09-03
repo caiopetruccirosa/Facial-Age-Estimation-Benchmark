@@ -42,13 +42,13 @@ logs_dir="logs/experiments/"$experiment_name""
 mkdir -p $logs_dir
 
 # run prepare_data.py step
-python prepare_data.py "$experiment_config" 2>&1 | tee -a "$logs_dir"/prepare_data.log
+python prepare_data.py "$experiment_config" &> "$logs_dir"/prepare_data.log
 
 # run train.py step for each split
 for split in "${splits[@]}"; do
     echo "Training model on split "$split"..."
-    CUDA_VISIBLE_DEVICES="$cuda_devices" python train.py "$experiment_config" 0 2>&1 | tee -a "$logs_dir"/train_split"$split".log
+    CUDA_VISIBLE_DEVICES="$cuda_devices" python train.py "$experiment_config" 0 &> "$logs_dir"/train_split"$split".log
 done
 
 # run evaluate.py step for all splits results
-python evaluate.py "$experiment_config" 2>&1 | tee -a "$logs_dir"/evaluate.log
+python evaluate.py "$experiment_config" &> "$logs_dir"/evaluate.log
