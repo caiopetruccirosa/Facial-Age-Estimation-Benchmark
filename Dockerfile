@@ -25,10 +25,8 @@ RUN apt-get update && \
     apt-get install -y \
         apt-transport-https ca-certificates apt-utils \
         software-properties-common build-essential \
-        wget git nano vim ffmpeg libgl1-mesa-glx libglib2.0-0 \
-        bzip2 cmake curl htop libssl-dev nvtop net-tools pandoc \
-        python3-sphinx tmux tree unrar unzip xdot fonts-powerline \
-        libsm6 libxext6 libgl1
+        wget git vim ffmpeg cmake curl htop libssl-dev \
+        nvtop net-tools pandoc tmux tree unrar unzip
 
 # Anything else you want to do like clean up goes here *
 RUN rm -rf /var/lib/apt/lists/* && \
