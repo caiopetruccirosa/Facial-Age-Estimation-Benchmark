@@ -10,6 +10,7 @@ cuda_devices=""
 experiment_config=""
 experiment_name=""
 logs_dir=""
+skip_prepare_data=false
 splits=()
 
 # loop through arguments, searching for --cuda_devices argument
@@ -28,6 +29,9 @@ for arg in "$@"; do
         IFS=',' read -a splits <<< "$splits_raw"
         
         ;;
+    --skip_prepare_data)
+        skip_prepare_data=true
+        ;;
     esac
 done
 
@@ -42,7 +46,12 @@ logs_dir="logs/experiments/"$experiment_name""
 mkdir -p $logs_dir
 
 # run prepare_data.py step
-python prepare_data.py "$experiment_config" &> "$logs_dir"/prepare_data.log
+if [ "$skip_prepare_data" = false ]; then
+    echo "Running prepare_data.py step..."
+    python prepare_data.py "$experiment_config" &> "$logs_dir"/prepare_data.log
+else
+    echo "Skipping prepare_data.py step..."
+fi
 
 # run train.py step for each split
 for split in "${splits[@]}"; do
@@ -51,4 +60,5 @@ for split in "${splits[@]}"; do
 done
 
 # run evaluate.py step for all splits results
+echo "Evaluating experiment results..."
 python evaluate.py "$experiment_config" &> "$logs_dir"/evaluate.log
