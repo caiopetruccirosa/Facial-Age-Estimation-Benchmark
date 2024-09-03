@@ -1,3 +1,5 @@
+mkdir -p logs/benchmarks/MORPH_only
+
 python prepare_data.py facebase/benchmarks/MORPH_only.yaml &> logs/benchmarks/MORPH_only/prepare_data.log
 
 python train.py facebase/benchmarks/MORPH_only.yaml 0 &> logs/benchmarks/MORPH_only/train_split0.log
