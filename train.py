@@ -15,6 +15,7 @@ import wandb
 from datetime import datetime
 
 from dotenv import load_dotenv
+from pytz import timezone
 
 # fix random seeds for reproducibility
 SEED = 123
@@ -106,8 +107,10 @@ if __name__ == '__main__':
     # Load WANDB_API_KEY as environment variable
     load_dotenv()
 
+    tz_sao_paulo = timezone('America/Sao_Paulo')
+
     wandb_project = "Facial-Age-Estimation-Benchmark"
-    wandb_name = config_name + f"({args.split}) " + datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    wandb_name = config_name + f"({args.split}) " + datetime.now(tz=tz_sao_paulo).strftime("%m/%d/%Y, %H:%M:%S")
     wandb.init( project=wandb_project, config=dict( yaml= args.config ), name = wandb_name, mode=mode )
 
     # Detect if we have a GPU available
