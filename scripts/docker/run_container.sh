@@ -5,7 +5,8 @@ DEFAULT_IMAGE_TAG="facial-age-benchmark-env"
 
 # these variables could be passed as environment variables
 IMAGE_TAG=${IMAGE_TAG:-$DEFAULT_IMAGE_TAG}
-CONTAINER_NAME=${IMAGE_TAG}-container
+HOSTNAME=$(hostname)
+CONTAINER_NAME=${IMAGE_TAG}-container-${HOSTNAME}
 
 RAM_SIZE="32g"
 PORT=${PORT:-4321}
