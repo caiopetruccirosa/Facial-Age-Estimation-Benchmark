@@ -182,7 +182,7 @@ if __name__ == '__main__':
     posterior, predicted_label, true_label, id, folder, error = eval_model( model, config, loss_matrix, dataloader, device )
 
     # Print errors
-    print("Model evalution:")
+    print("Model evaluation:")
     for i, set in enumerate( error.keys() ):
         print(f"[{set} set]" )
         for head in config['heads']:
