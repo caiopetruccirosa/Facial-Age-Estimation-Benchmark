@@ -28,6 +28,7 @@ exec docker run \
     -v "/hadatasets/facial-age-estimation/unofficial-agedb":"/local/xfrancv/Faces/AgeDB" \
     -v "/hadatasets/facial-age-estimation/utk-face":"/local/xfrancv/Faces/UTKFace" \
     -d -it --rm \
+    --userns=host \
     --name "$CONTAINER_NAME" \
     "$IMAGE_TAG" \
     bash
