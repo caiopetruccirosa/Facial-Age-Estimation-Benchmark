@@ -26,7 +26,8 @@ RUN apt-get update && \
         apt-transport-https ca-certificates apt-utils \
         software-properties-common build-essential \
         wget git vim ffmpeg cmake curl htop libssl-dev \
-        nvtop net-tools pandoc tmux tree unrar unzip
+        nvtop net-tools pandoc tmux tree unrar unzip \
+        libfontconfig1-dev pkg-config
 
 # Anything else you want to do like clean up goes here *
 RUN rm -rf /var/lib/apt/lists/* && \
