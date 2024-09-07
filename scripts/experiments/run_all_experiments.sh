@@ -15,7 +15,7 @@ for experiment_config in "${configs[@]}"; do
     experiment_name="${experiment_name%.*}"    # remove extension from path
 
     # log experiment name on log file
-    echo "Running experiment: "$experiment_name"" &> logs/experiments/"$experiment_name".log
+    echo "Running experiment: "$experiment_name"" >> logs/experiments/all_benchmarks.log
     ./scripts/experiments/run_experiment.sh \
         --cuda_devices=0 \
         --splits=0,1,2,3,4 \
