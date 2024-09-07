@@ -4,3 +4,4 @@ wandb/
 facebase/data/
 facebase/results/
 .env
+scripts/tmp/
