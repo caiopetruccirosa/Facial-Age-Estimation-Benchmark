@@ -43,7 +43,7 @@ experiment_name="${experiment_name%.*}"    # remove extension from path
 logs_dir="logs/experiments/"$experiment_name""
 
 # create logs directory
-mkdir -p $logs_dir
+mkdir -p "$logs_dir"
 
 # run prepare_data.py step
 if [ "$skip_prepare_data" = false ]; then
