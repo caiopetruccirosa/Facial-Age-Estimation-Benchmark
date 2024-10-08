@@ -1,6 +1,6 @@
 data:
   benchmark: "facebase/benchmarks/MORPH.yaml"
-  img_dir: "/local/xfrancv/Faces/"
+  img_dir: "/mnt/data/mlg/Faces/"
   output_dir: "facebase/results/"
   data_dir: "facebase/data/"
 
@@ -37,5 +37,5 @@ optimizer:
 preprocess:
   bbox_extension: [0, 0]
   input_extension: [0.05, 0.05]
-  trn: { path: "lib/augmentation_configs/128x128/jitter+hflip.json" }
-  val: { path: "lib/augmentation_configs/128x128/center_crop.json" }
+  trn: { path: "lib/augmentation_configs/256x256/jitter+hflip.json" }
+  val: { path: "lib/augmentation_configs/256x256/center_crop.json" }
